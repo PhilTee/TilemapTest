@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5ls4rqn1xohi"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_ral31"]
+[ext_resource type="Texture2D" uid="uid://cccp0ronmywar" path="res://icon.svg" id="1_txfau"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_elmvw"]
+radius = 62.857
+height = 125.714
+
+[sub_resource type="LabelSettings" id="LabelSettings_1ceje"]
+font_size = 79
+
+[node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(0.35, 0.35)
+collision_mask = 0
+script = ExtResource("1_ral31")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_txfau")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.44957e-06, -5.44957e-06)
+shape = SubResource("CapsuleShape2D_elmvw")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -63.0
+offset_top = -114.0
+offset_right = 63.0
+offset_bottom = -74.0
+
+[node name="Label" type="Label" parent="."]
+offset_left = -63.0
+offset_top = -54.4286
+offset_right = 66.0
+offset_bottom = 71.5714
+label_settings = SubResource("LabelSettings_1ceje")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,59 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdtgenihwo4is"]
+
+[ext_resource type="Texture2D" uid="uid://c3e5nebivm1d7" path="res://floor_01_tileset.png" id="1_qhhg0"]
+[ext_resource type="Script" path="res://TileMap.gd" id="2_jdnjb"]
+[ext_resource type="PackedScene" uid="uid://c5ls4rqn1xohi" path="res://enemies/enemy.tscn" id="3_6g5qk"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qa2cy"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_jk7m3"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qgi0k"]
+resource_name = "floors"
+texture = ExtResource("1_qhhg0")
+use_texture_padding = false
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_jk7m3")
+0:0/next_alternative_id = 5
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_qa2cy")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6y7ci"]
+resource_name = "walls"
+texture = ExtResource("1_qhhg0")
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_dp07p"]
+physics_layer_0/collision_layer = 4
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_qgi0k")
+sources/1 = SubResource("TileSetAtlasSource_6y7ci")
+
+[node name="Level" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_dp07p")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 131073, 0, 65536, 131073, 0, 131072, 131073, 0, 196608, 131073, 0, 262144, 131073, 0, 1, 131073, 0, 65537, 65536, 0, 131073, 65536, 0, 196609, 65536, 0, 262145, 65536, 0, 2, 131073, 0, 65538, 65536, 0, 131074, 131073, 0, 196610, 131073, 0, 262146, 65536, 0, 3, 131073, 0, 65539, 65536, 0, 131075, 65536, 0, 196611, 131073, 0, 262147, 65536, 0, 4, 131073, 0, 65540, 131073, 0, 131076, 65536, 0, 196612, 131073, 0, 262148, 65536, 0, 5, 131073, 0, 65541, 131073, 0, 131077, 65536, 0, 196613, 131073, 0, 262149, 65536, 0, 6, 131073, 0, 65542, 65536, 0, 131078, 65536, 0, 196614, 131073, 0, 262150, 65536, 0, 7, 131073, 0, 65543, 131073, 0, 131079, 131073, 0, 196615, 131073, 0, 262151, 131073, 0, 327680, 131073, 0, 327681, 131073, 0, 327682, 131073, 0, 327683, 131073, 0, 327684, 131073, 0, 327685, 131073, 0, 327686, 131073, 0, 327687, 131073, 0)
+script = ExtResource("2_jdnjb")
+
+[node name="Enemy" parent="." instance=ExtResource("3_6g5qk")]
+position = Vector2(104, 72)
+scale = Vector2(0.1, 0.1)
